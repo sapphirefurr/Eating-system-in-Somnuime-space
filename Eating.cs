@@ -32,51 +32,40 @@ namespace SomniumSpace.Worlds.Snacks
         [SerializeField] private AudioClip eatSFX;
         [SerializeField] private ParticleSystem eatParticles;
 
+        // Cached components
         private XRGrabInteractable _grabInteractable;
         private Rigidbody _rigidbody;
+
+        // State
         private bool _isGrabbed;
-
-        // FIX: _hasBeenEaten now only resets in ShowMesh, not in OnNetworkEatReceived.
-        // This prevents a second eat event firing during the respawn delay.
         private bool _hasBeenEaten;
-
-        // FIX: tracks whether a respawn is already pending, so multiple OnNetworkEatReceived
-        // calls (from multiple clients all invoking ShowMesh) don't stack up.
         private bool _respawnPending;
+        private bool _audioPlayed;
 
+        // Player head references
         private Transform _localPlayerHead;
         private bool _headSearchDone;
         private Camera _mainCamera;
 
-        private float _debugLogTimer;
-        private const float DEBUG_LOG_INTERVAL = 1f;
-
+        // 10Hz mouth check timer
         private float _mouthCheckTimer;
         private const float MOUTH_CHECK_INTERVAL = 0.1f;
 
-        private bool _audioPlayed;
+        // Debug distance log timer
+        private float _debugLogTimer;
+        private const float DEBUG_LOG_INTERVAL = 1f;
+
+        #region Unity Lifecycle
 
         private void Awake()
         {
             _grabInteractable = GetComponent<XRGrabInteractable>();
-
-            if (_grabInteractable == null)
-                Debug.LogWarning("GrabAndEat: No XRGrabInteractable found.");
-            else
-                Debug.Log("GrabAndEat: Awake OK - XRGrabInteractable found.");
-
-            if (networkEnableObject == null)
-                Debug.LogWarning("GrabAndEat: NetworkEnableObject is NOT assigned in Inspector!");
-            else
-                Debug.Log("GrabAndEat: Awake OK - NetworkEnableObject found.");
-
             _rigidbody = GetComponent<Rigidbody>();
 
             if (foodMeshRenderer == null)
                 foodMeshRenderer = GetComponent<MeshRenderer>();
 
-            if (foodMeshRenderer == null)
-                Debug.LogWarning("GrabAndEat: No MeshRenderer found - assign it in the Inspector.");
+            ValidateReferences();
 
             if (_grabInteractable != null)
             {
@@ -87,7 +76,7 @@ namespace SomniumSpace.Worlds.Snacks
 
         private void OnEnable()
         {
-            TryGetReferences();
+            TryGetPlayerReferences();
 
             var container = SomniumBridge.PlayersContainer;
             if (container != null)
@@ -101,223 +90,6 @@ namespace SomniumSpace.Worlds.Snacks
                 container.OnLocalPlayerAdded -= OnLocalPlayerAdded;
         }
 
-        private void OnLocalPlayerAdded(ISomniumPlayer player)
-        {
-            _localPlayerHead = player?.References?.Body?.Head;
-            _headSearchDone = _localPlayerHead != null;
-            Debug.Log("GrabAndEat: OnLocalPlayerAdded - head found: " + _headSearchDone);
-        }
-
-        private void TryGetReferences()
-        {
-            if (!_headSearchDone)
-            {
-                var container = SomniumBridge.PlayersContainer;
-                if (container != null)
-                {
-                    var localPlayer = container.LocalPlayer;
-                    if (localPlayer != null)
-                    {
-                        _localPlayerHead = localPlayer.References?.Body?.Head;
-                        _headSearchDone = _localPlayerHead != null;
-                        Debug.Log("GrabAndEat: TryGetReferences - head found: " + _headSearchDone);
-                    }
-                    else
-                    {
-                        Debug.Log("GrabAndEat: TryGetReferences - LocalPlayer is null, will retry on grab.");
-                    }
-                }
-            }
-
-            if (_mainCamera == null && Camera.main != null)
-            {
-                _mainCamera = Camera.main;
-                Debug.Log("GrabAndEat: TryGetReferences - Camera.main found: " + _mainCamera.name);
-            }
-        }
-
-        private void OnGrabbed(SelectEnterEventArgs args)
-        {
-            _isGrabbed = true;
-            _debugLogTimer = 0f;
-            _mouthCheckTimer = 0f;
-            TryGetReferences();
-            Debug.Log("GrabAndEat: Object GRABBED."
-                + " | Bridge head: " + (_localPlayerHead != null)
-                + " | Camera.main: " + (_mainCamera != null)
-                + " | hasBeenEaten: " + _hasBeenEaten
-                + " | mouthRadius: " + mouthRadius);
-        }
-
-        private void OnReleased(SelectExitEventArgs args)
-        {
-            _isGrabbed = false;
-            Debug.Log("GrabAndEat: Object RELEASED.");
-        }
-
-        private void Update()
-        {
-            if (!_isGrabbed) return;
-            if (_hasBeenEaten) return;
-
-            _mouthCheckTimer += Time.deltaTime;
-            if (_mouthCheckTimer < MOUTH_CHECK_INTERVAL) return;
-            _mouthCheckTimer = 0f;
-
-            if (_mainCamera == null && Camera.main != null)
-                _mainCamera = Camera.main;
-
-            Vector3 mouthPos;
-            string mouthSource;
-
-            if (_localPlayerHead != null)
-            {
-                mouthPos = _localPlayerHead.position;
-                mouthSource = "BridgeHead";
-            }
-            else if (_mainCamera != null)
-            {
-                mouthPos = _mainCamera.transform.position;
-                mouthSource = "Camera";
-            }
-            else
-            {
-                Debug.LogWarning("GrabAndEat: No head or camera reference - cannot check distance!");
-                return;
-            }
-
-            float dist = Vector3.Distance(transform.position, mouthPos);
-
-            _debugLogTimer += Time.deltaTime;
-            if (_debugLogTimer >= DEBUG_LOG_INTERVAL)
-            {
-                _debugLogTimer = 0f;
-                Debug.Log("GrabAndEat: dist to mouth = " + dist.ToString("F3")
-                    + " | radius = " + mouthRadius
-                    + " | source = " + mouthSource);
-            }
-
-            if (dist <= mouthRadius)
-            {
-                Debug.Log("GrabAndEat: Mouth distance reached! Calling SendEatEvent.");
-                SendEatEvent();
-            }
-        }
-
-        private void SendEatEvent()
-        {
-            _hasBeenEaten = true;
-
-            if (networkEnableObject != null)
-            {
-                Debug.Log("GrabAndEat: Calling networkEnableObject.SetTargetEnabled(false).");
-                networkEnableObject.SetTargetEnabled(false);
-            }
-            else
-            {
-                Debug.LogWarning("GrabAndEat: NetworkEnableObject is null! Falling back to local eat.");
-                OnNetworkEatReceived(false);
-            }
-        }
-
-        /// <summary>
-        /// Wire this to NetworkEnableObject's _onChange UnityEvent in the Inspector.
-        /// Fires on ALL clients when the eat RPC is received.
-        /// </summary>
-        public void OnNetworkEatReceived(bool isEnabled)
-        {
-            Debug.Log("GrabAndEat: OnNetworkEatReceived called with isEnabled = " + isEnabled);
-
-            if (isEnabled) return;
-
-            // FIX: guard against multiple clients all scheduling a respawn simultaneously.
-            if (_respawnPending)
-            {
-                Debug.Log("GrabAndEat: Respawn already pending, ignoring duplicate OnNetworkEatReceived.");
-                return;
-            }
-            _respawnPending = true;
-
-            Debug.Log("GrabAndEat: Running eat effects now.");
-
-            if (foodMeshRenderer != null)
-            {
-                foodMeshRenderer.enabled = false;
-                Debug.Log("GrabAndEat: Mesh hidden.");
-            }
-
-            if (audioSource != null && eatSFX != null && !_audioPlayed)
-            {
-                _audioPlayed = true;
-                audioSource.PlayOneShot(eatSFX);
-            }
-
-            if (eatParticles != null)
-            {
-                eatParticles.transform.SetParent(null);
-                eatParticles.Play();
-            }
-
-            // FIX: removed _hasBeenEaten = false here.
-            // It now only resets in ShowMesh, after the respawn delay has elapsed.
-
-            Invoke(nameof(ShowMesh), respawnDelay);
-        }
-
-        private void ShowMesh()
-        {
-            _respawnPending = false;
-
-            // FIX: reset eaten state here, not in OnNetworkEatReceived.
-            // The object is only ready to be eaten again once it has fully respawned.
-            _hasBeenEaten = false;
-
-            _audioPlayed = false;
-
-            if (foodMeshRenderer != null)
-            {
-                foodMeshRenderer.enabled = true;
-                Debug.Log("GrabAndEat: Mesh shown.");
-            }
-
-            // FIX: don't teleport if the player is currently holding the object.
-            // Teleporting mid-grab causes the stuck/rotating behaviour.
-            if (_isGrabbed)
-            {
-                Debug.Log("GrabAndEat: Skipping teleport - object is currently grabbed.");
-
-                if (networkEnableObject != null)
-                    networkEnableObject.SetTargetEnabled(true);
-
-                return;
-            }
-
-            if (tableSpawnPoint != null)
-            {
-                if (_rigidbody != null)
-                {
-                    _rigidbody.constraints = RigidbodyConstraints.None;
-                    _rigidbody.linearVelocity = Vector3.zero;
-                    _rigidbody.angularVelocity = Vector3.zero;
-                }
-
-                transform.position = tableSpawnPoint.position;
-                transform.rotation = tableSpawnPoint.rotation;
-
-                if (_rigidbody != null)
-                    _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
-
-                Debug.Log("GrabAndEat: Teleported to table at " + tableSpawnPoint.position);
-            }
-            else
-            {
-                Debug.LogWarning("GrabAndEat: tableSpawnPoint not assigned - cannot teleport.");
-            }
-
-            if (networkEnableObject != null)
-                networkEnableObject.SetTargetEnabled(true);
-        }
-
         private void OnDestroy()
         {
             CancelInvoke(nameof(ShowMesh));
@@ -328,5 +100,252 @@ namespace SomniumSpace.Worlds.Snacks
                 _grabInteractable.selectExited.RemoveListener(OnReleased);
             }
         }
+
+        private void Update()
+        {
+            if (!_isGrabbed || _hasBeenEaten) return;
+
+            // Throttle to 10Hz
+            _mouthCheckTimer += Time.deltaTime;
+            if (_mouthCheckTimer < MOUTH_CHECK_INTERVAL) return;
+            _mouthCheckTimer = 0f;
+
+            if (!TryGetMouthPosition(out Vector3 mouthPos, out string mouthSource)) return;
+
+            float dist = Vector3.Distance(transform.position, mouthPos);
+
+            LogDistanceDebug(dist, mouthSource);
+
+            if (dist <= mouthRadius)
+            {
+                Debug.Log("GrabAndEat: Mouth distance reached! Sending eat event.");
+                SendEatEvent();
+            }
+        }
+
+        #endregion
+
+        #region Grab Events
+
+        private void OnGrabbed(SelectEnterEventArgs args)
+        {
+            _isGrabbed = true;
+            _mouthCheckTimer = 0f;
+            _debugLogTimer = 0f;
+            TryGetPlayerReferences();
+            Debug.Log("GrabAndEat: Grabbed | head=" + (_localPlayerHead != null)
+                + " camera=" + (_mainCamera != null)
+                + " eaten=" + _hasBeenEaten);
+        }
+
+        private void OnReleased(SelectExitEventArgs args)
+        {
+            _isGrabbed = false;
+            Debug.Log("GrabAndEat: Released.");
+        }
+
+        #endregion
+
+        #region Player Reference
+
+        private void OnLocalPlayerAdded(ISomniumPlayer player)
+        {
+            _localPlayerHead = player?.References?.Body?.Head;
+            _headSearchDone = _localPlayerHead != null;
+            Debug.Log("GrabAndEat: OnLocalPlayerAdded - head found: " + _headSearchDone);
+        }
+
+        private void TryGetPlayerReferences()
+        {
+            if (!_headSearchDone)
+            {
+                var localPlayer = SomniumBridge.PlayersContainer?.LocalPlayer;
+                if (localPlayer != null)
+                {
+                    _localPlayerHead = localPlayer.References?.Body?.Head;
+                    _headSearchDone = _localPlayerHead != null;
+                    Debug.Log("GrabAndEat: Head reference found: " + _headSearchDone);
+                }
+                else
+                {
+                    Debug.Log("GrabAndEat: LocalPlayer null - will retry on grab.");
+                }
+            }
+
+            if (_mainCamera == null && Camera.main != null)
+            {
+                _mainCamera = Camera.main;
+                Debug.Log("GrabAndEat: Camera.main cached: " + _mainCamera.name);
+            }
+        }
+
+        private bool TryGetMouthPosition(out Vector3 mouthPos, out string source)
+        {
+            if (_localPlayerHead != null)
+            {
+                mouthPos = _localPlayerHead.position;
+                source = "BridgeHead";
+                return true;
+            }
+
+            if (_mainCamera == null && Camera.main != null)
+                _mainCamera = Camera.main;
+
+            if (_mainCamera != null)
+            {
+                mouthPos = _mainCamera.transform.position;
+                source = "Camera";
+                return true;
+            }
+
+            Debug.LogWarning("GrabAndEat: No head or camera reference available.");
+            mouthPos = Vector3.zero;
+            source = "None";
+            return false;
+        }
+
+        #endregion
+
+        #region Eat Logic
+
+        private void SendEatEvent()
+        {
+            _hasBeenEaten = true;
+
+            if (networkEnableObject != null)
+            {
+                Debug.Log("GrabAndEat: Sending eat event via NetworkEnableObject.");
+                networkEnableObject.SetTargetEnabled(false);
+            }
+            else
+            {
+                Debug.LogWarning("GrabAndEat: No NetworkEnableObject - falling back to local eat.");
+                OnNetworkEatReceived(false);
+            }
+        }
+
+        /// <summary>
+        /// Wire this to NetworkEnableObject's _onChange UnityEvent in the Inspector.
+        /// Fires on ALL clients when the eat RPC is received.
+        /// </summary>
+        public void OnNetworkEatReceived(bool isEnabled)
+        {
+            // Ignore re-enable calls - those are handled by ShowMesh
+            if (isEnabled) return;
+
+            // Guard against duplicate calls from multiple clients
+            if (_respawnPending)
+            {
+                Debug.Log("GrabAndEat: Respawn already pending, ignoring duplicate call.");
+                return;
+            }
+
+            _respawnPending = true;
+            Debug.Log("GrabAndEat: Eat received - hiding mesh and scheduling respawn.");
+
+            HideMesh();
+            PlayEatFeedback();
+
+            Invoke(nameof(ShowMesh), respawnDelay);
+        }
+
+        private void HideMesh()
+        {
+            if (foodMeshRenderer != null)
+            {
+                foodMeshRenderer.enabled = false;
+                Debug.Log("GrabAndEat: Mesh hidden.");
+            }
+        }
+
+        private void PlayEatFeedback()
+        {
+            if (!_audioPlayed && audioSource != null && eatSFX != null)
+            {
+                _audioPlayed = true;
+                audioSource.PlayOneShot(eatSFX);
+            }
+
+            if (eatParticles != null)
+                eatParticles.Play();
+        }
+
+        private void ShowMesh()
+        {
+            _respawnPending = false;
+            _hasBeenEaten = false;
+            _audioPlayed = false;
+
+            // Show mesh first at current position
+            if (foodMeshRenderer != null)
+            {
+                foodMeshRenderer.enabled = true;
+                Debug.Log("GrabAndEat: Mesh shown.");
+            }
+
+            // Skip teleport if currently grabbed to avoid snap-while-held issues
+            if (_isGrabbed)
+            {
+                Debug.Log("GrabAndEat: Skipping teleport - object is currently grabbed.");
+                networkEnableObject?.SetTargetEnabled(true);
+                return;
+            }
+
+            TeleportToTable();
+
+            networkEnableObject?.SetTargetEnabled(true);
+        }
+
+        private void TeleportToTable()
+        {
+            if (tableSpawnPoint == null)
+            {
+                Debug.LogWarning("GrabAndEat: tableSpawnPoint not assigned - cannot teleport.");
+                return;
+            }
+
+            if (_rigidbody != null)
+            {
+                _rigidbody.constraints = RigidbodyConstraints.None;
+                _rigidbody.linearVelocity = Vector3.zero;
+                _rigidbody.angularVelocity = Vector3.zero;
+            }
+
+            transform.position = tableSpawnPoint.position;
+            transform.rotation = tableSpawnPoint.rotation;
+
+            if (_rigidbody != null)
+                _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+
+            Debug.Log("GrabAndEat: Teleported to " + tableSpawnPoint.position);
+        }
+
+        #endregion
+
+        #region Validation & Debug
+
+        private void ValidateReferences()
+        {
+            if (_grabInteractable == null)
+                Debug.LogWarning("GrabAndEat: No XRGrabInteractable found on " + gameObject.name);
+            if (networkEnableObject == null)
+                Debug.LogWarning("GrabAndEat: NetworkEnableObject not assigned on " + gameObject.name);
+            if (foodMeshRenderer == null)
+                Debug.LogWarning("GrabAndEat: No MeshRenderer found on " + gameObject.name);
+            if (tableSpawnPoint == null)
+                Debug.LogWarning("GrabAndEat: tableSpawnPoint not assigned on " + gameObject.name);
+        }
+
+        private void LogDistanceDebug(float dist, string source)
+        {
+            _debugLogTimer += Time.deltaTime;
+            if (_debugLogTimer < DEBUG_LOG_INTERVAL) return;
+            _debugLogTimer = 0f;
+            Debug.Log("GrabAndEat: dist=" + dist.ToString("F3")
+                + " radius=" + mouthRadius
+                + " source=" + source);
+        }
+
+        #endregion
     }
 }
