@@ -14,8 +14,8 @@ namespace SomniumSpace.Worlds.Snacks
         [SerializeField] private Transform tableSpawnPoint;
 
         [Header("Mesh")]
-        [Tooltip("The MeshRenderer on the food to hide/show.")]
-        [SerializeField] private MeshRenderer foodMeshRenderer;
+        [Tooltip("The GameObject to hide/show when eaten and respawned. Defaults to this GameObject if unassigned.")]
+        [SerializeField] private GameObject foodMeshObject;
         [Tooltip("How long in seconds before the food reappears on the table.")]
         [SerializeField] private float respawnDelay = 1f;
 
@@ -62,8 +62,9 @@ namespace SomniumSpace.Worlds.Snacks
             _grabInteractable = GetComponent<XRGrabInteractable>();
             _rigidbody = GetComponent<Rigidbody>();
 
-            if (foodMeshRenderer == null)
-                foodMeshRenderer = GetComponent<MeshRenderer>();
+            // Default to this GameObject if nothing assigned
+            if (foodMeshObject == null)
+                foodMeshObject = gameObject;
 
             ValidateReferences();
 
@@ -251,9 +252,9 @@ namespace SomniumSpace.Worlds.Snacks
 
         private void HideMesh()
         {
-            if (foodMeshRenderer != null)
+            if (foodMeshObject != null)
             {
-                foodMeshRenderer.enabled = false;
+                foodMeshObject.SetActive(false);
                 Debug.Log("GrabAndEat: Mesh hidden.");
             }
         }
@@ -276,22 +277,23 @@ namespace SomniumSpace.Worlds.Snacks
             _hasBeenEaten = false;
             _audioPlayed = false;
 
-            // Show mesh first at current position
-            if (foodMeshRenderer != null)
-            {
-                foodMeshRenderer.enabled = true;
-                Debug.Log("GrabAndEat: Mesh shown.");
-            }
-
             // Skip teleport if currently grabbed to avoid snap-while-held issues
             if (_isGrabbed)
             {
                 Debug.Log("GrabAndEat: Skipping teleport - object is currently grabbed.");
+                if (foodMeshObject != null) foodMeshObject.SetActive(true);
                 networkEnableObject?.SetTargetEnabled(true);
                 return;
             }
 
+            // Teleport while mesh is still hidden, then reveal
             TeleportToTable();
+
+            if (foodMeshObject != null)
+            {
+                foodMeshObject.SetActive(true);
+                Debug.Log("GrabAndEat: Mesh shown.");
+            }
 
             networkEnableObject?.SetTargetEnabled(true);
         }
@@ -330,8 +332,6 @@ namespace SomniumSpace.Worlds.Snacks
                 Debug.LogWarning("GrabAndEat: No XRGrabInteractable found on " + gameObject.name);
             if (networkEnableObject == null)
                 Debug.LogWarning("GrabAndEat: NetworkEnableObject not assigned on " + gameObject.name);
-            if (foodMeshRenderer == null)
-                Debug.LogWarning("GrabAndEat: No MeshRenderer found on " + gameObject.name);
             if (tableSpawnPoint == null)
                 Debug.LogWarning("GrabAndEat: tableSpawnPoint not assigned on " + gameObject.name);
         }
