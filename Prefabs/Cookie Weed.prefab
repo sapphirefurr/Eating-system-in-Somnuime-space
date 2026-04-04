@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &746443748422299983
+--- !u!1 &5951407538900378152
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7796066317329502733}
-  - component: {fileID: 8388972879956170344}
+  - component: {fileID: 8305108591420450240}
+  - component: {fileID: 1980983054404223154}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7796066317329502733
+--- !u!4 &8305108591420450240
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746443748422299983}
+  m_GameObject: {fileID: 5951407538900378152}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5024363193215309990}
+  m_Father: {fileID: 8100820063959755636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &8388972879956170344
+--- !u!82 &1980983054404223154
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746443748422299983}
+  m_GameObject: {fileID: 5951407538900378152}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -129,7 +129,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1582142795845366999
+--- !u!1 &6991993138498904690
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,9 +137,136 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4926352838036606992}
-  - component: {fileID: 1701549008683809574}
-  - component: {fileID: 5597059146637057622}
+  - component: {fileID: 3014822428878673950}
+  m_Layer: 0
+  m_Name: Respawn Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3014822428878673950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6991993138498904690}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7760091521071221358}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &7423685635318024548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8618807612435865755}
+  - component: {fileID: 4047284383533887484}
+  - component: {fileID: 518389944886419565}
+  - component: {fileID: 7381137746203240594}
+  m_Layer: 0
+  m_Name: Cookie weed Networking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8618807612435865755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423685635318024548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8100820063959755636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4047284383533887484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423685635318024548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d75b1ea2470f9b4e81bdbbcfdcd0bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.NetworkEnableObject
+  _networkBridge: {fileID: 518389944886419565}
+  _networkObject: {fileID: 7381137746203240594}
+  _defaultEnable: 1
+  _controledGameObjects: []
+  _onChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3162458164329492437}
+        m_TargetAssemblyTypeName: SomniumSpace.Worlds.Snacks.GrabAndEat, SomniumSpace.Worlds.Snacks
+        m_MethodName: OnNetworkEatReceived
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &518389944886419565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423685635318024548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28732b03e6f75884696d521673a4d2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SomniumSpace.Network::SomniumSpace.Network.Bridge.NetworkBridge
+--- !u!114 &7381137746203240594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423685635318024548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 2687233100
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 518389944886419565}
+  ForceRemoteRenderTimeframe: 0
+--- !u!1 &7629168286932605884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248806102225105874}
+  - component: {fileID: 9222545403524244118}
+  - component: {fileID: 6462077533384681603}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -147,36 +274,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4926352838036606992
+--- !u!4 &1248806102225105874
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582142795845366999}
+  m_GameObject: {fileID: 7629168286932605884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5024363193215309990}
+  m_Father: {fileID: 8100820063959755636}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1701549008683809574
+--- !u!33 &9222545403524244118
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582142795845366999}
-  m_Mesh: {fileID: 3348057913412297574, guid: 3c877d22617302d4e930906b669f7422, type: 3}
---- !u!23 &5597059146637057622
+  m_GameObject: {fileID: 7629168286932605884}
+  m_Mesh: {fileID: 2445588513963586723, guid: b880e80e7996f234f9090f149ebea05f, type: 3}
+--- !u!23 &6462077533384681603
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582142795845366999}
+  m_GameObject: {fileID: 7629168286932605884}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -195,8 +322,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: 36a38e86a50cfca43adc581488ab0a08, type: 2}
   - {fileID: 2100000, guid: 7870205a0033fdc4ea4c3245f0ec232b, type: 2}
-  - {fileID: 2100000, guid: dd6d90fa5f9115747a890c8f5baab646, type: 2}
+  - {fileID: 2100000, guid: aec4be352bac9e84cba2639dc0f0d3d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,7 +348,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2722908271549945254
+--- !u!1 &8459089064551696004
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,32 +356,33 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8940491356407394202}
+  - component: {fileID: 7760091521071221358}
   m_Layer: 0
-  m_Name: Cake 1
+  m_Name: Cookie Weed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8940491356407394202
+--- !u!4 &7760091521071221358
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2722908271549945254}
+  m_GameObject: {fileID: 8459089064551696004}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.48, y: 0.933, z: -1.04}
+  m_LocalRotation: {x: -0.000000014787917, y: -0.0000000018336064, z: 0.23540764,
+    w: 0.9718967}
+  m_LocalPosition: {x: 3.954, y: 0.817, z: -3.316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5024363193215309990}
-  - {fileID: 5810181663918946842}
+  - {fileID: 8100820063959755636}
+  - {fileID: 3014822428878673950}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5884820640807078185
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.231}
+--- !u!1 &8721781698048216445
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,210 +390,83 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4524057053350318538}
-  - component: {fileID: 2414029970115671663}
-  - component: {fileID: 5059921506474913601}
-  - component: {fileID: 1383539447415986827}
+  - component: {fileID: 8100820063959755636}
+  - component: {fileID: 3162458164329492437}
+  - component: {fileID: 4757896913011967799}
+  - component: {fileID: 262549359214087910}
+  - component: {fileID: 3609884289109255145}
+  - component: {fileID: 2991955830573462865}
+  - component: {fileID: 2667696814404124412}
+  - component: {fileID: 6557250529472063825}
   m_Layer: 0
-  m_Name: Cake 1 Networking
+  m_Name: Cookie Weed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4524057053350318538
+--- !u!4 &8100820063959755636
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5024363193215309990}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2414029970115671663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d75b1ea2470f9b4e81bdbbcfdcd0bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.NetworkEnableObject
-  _networkBridge: {fileID: 5059921506474913601}
-  _networkObject: {fileID: 1383539447415986827}
-  _defaultEnable: 1
-  _controledGameObjects: []
-  _onChange:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 750056452594870414}
-        m_TargetAssemblyTypeName: SomniumSpace.Worlds.Snacks.GrabAndEat, SomniumSpace.Worlds.Snacks
-        m_MethodName: OnNetworkEatReceived
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5059921506474913601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28732b03e6f75884696d521673a4d2b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SomniumSpace.Network::SomniumSpace.Network.Bridge.NetworkBridge
---- !u!114 &1383539447415986827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
-  SortKey: 3909429965
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 5059921506474913601}
-  ForceRemoteRenderTimeframe: 0
---- !u!1 &6444872957529548951
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5810181663918946842}
-  m_Layer: 0
-  m_Name: Respawn Location
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5810181663918946842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6444872957529548951}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8940491356407394202}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &8108747218585988400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5024363193215309990}
-  - component: {fileID: 750056452594870414}
-  - component: {fileID: 3979709586822814433}
-  - component: {fileID: 7534390280481468877}
-  - component: {fileID: 7655407884256487965}
-  - component: {fileID: 796642583715276800}
-  - component: {fileID: 484051405007807801}
-  - component: {fileID: 5332695762028062626}
-  m_Layer: 0
-  m_Name: Cake
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5024363193215309990
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.08}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4926352838036606992}
-  - {fileID: 4524057053350318538}
-  - {fileID: 7796066317329502733}
-  m_Father: {fileID: 8940491356407394202}
+  - {fileID: 1248806102225105874}
+  - {fileID: 8618807612435865755}
+  - {fileID: 8305108591420450240}
+  m_Father: {fileID: 7760091521071221358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &750056452594870414
+--- !u!114 &3162458164329492437
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2b585cafbcca75469d34065e9c3741c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.GrabAndEat
-  tableSpawnPoint: {fileID: 5810181663918946842}
-  foodMeshObject: {fileID: 1582142795845366999}
+  tableSpawnPoint: {fileID: 3014822428878673950}
+  foodMeshObject: {fileID: 7629168286932605884}
   respawnDelay: 1
   mouthRadius: 0.3
-  networkEnableObject: {fileID: 2414029970115671663}
-  audioSource: {fileID: 8388972879956170344}
+  networkEnableObject: {fileID: 4047284383533887484}
+  audioSource: {fileID: 1980983054404223154}
   eatSFX: {fileID: 8300000, guid: 5c30f52c5b831f24bab6d0416ece87c8, type: 3}
   eatParticles: {fileID: 0}
---- !u!114 &3979709586822814433
+--- !u!114 &4757896913011967799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8f14f1198a49cb418d604114edc06a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.NetworkGrabbable
-  _grabInteracable: {fileID: 7655407884256487965}
-  _rigidbody: {fileID: 484051405007807801}
-  _networkObject: {fileID: 796642583715276800}
-  _networkRigidbody: {fileID: 7534390280481468877}
+  _grabInteracable: {fileID: 3609884289109255145}
+  _rigidbody: {fileID: 2667696814404124412}
+  _networkObject: {fileID: 2991955830573462865}
+  _networkRigidbody: {fileID: 262549359214087910}
   _isKinematic: 1
---- !u!114 &7534390280481468877
+--- !u!114 &262549359214087910
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
@@ -481,13 +483,13 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
---- !u!114 &7655407884256487965
+--- !u!114 &3609884289109255145
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
@@ -610,33 +612,33 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
---- !u!114 &796642583715276800
+--- !u!114 &2991955830573462865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
-  SortKey: 3719722763
+  SortKey: 1714204706
   ObjectInterest: 1
   Flags: 524289
   NestedObjects:
-  - {fileID: 1383539447415986827}
+  - {fileID: 7381137746203240594}
   NetworkedBehaviours:
-  - {fileID: 7534390280481468877}
+  - {fileID: 262549359214087910}
   ForceRemoteRenderTimeframe: 0
---- !u!54 &484051405007807801
+--- !u!54 &2667696814404124412
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -657,13 +659,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5332695762028062626
+--- !u!65 &6557250529472063825
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 8721781698048216445}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -676,5 +678,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.005682856, y: 0.005406989, z: 0.002094901}
-  m_Center: {x: 0.0000943774, y: -0.000056183635, z: -0.000075708034}
+  m_Size: {x: 0.0011567633, y: 0.0012548486, z: 0.0010912931}
+  m_Center: {x: -0.000029633416, y: -0.000032714754, z: -0.00006903065}

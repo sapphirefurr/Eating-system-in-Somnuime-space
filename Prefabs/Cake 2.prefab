@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &746443748422299983
+--- !u!1 &2620908452282223711
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,104 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7796066317329502733}
-  - component: {fileID: 8388972879956170344}
+  - component: {fileID: 7226164826750083693}
+  - component: {fileID: 2084896084089193735}
+  - component: {fileID: 1343895308580990618}
+  - component: {fileID: 6308585966106209032}
+  m_Layer: 0
+  m_Name: Cake 2 Networking
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7226164826750083693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620908452282223711}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6718216657315975080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2084896084089193735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620908452282223711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d75b1ea2470f9b4e81bdbbcfdcd0bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.NetworkEnableObject
+  _networkBridge: {fileID: 1343895308580990618}
+  _networkObject: {fileID: 6308585966106209032}
+  _defaultEnable: 1
+  _controledGameObjects: []
+  _onChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3040849880455331771}
+        m_TargetAssemblyTypeName: SomniumSpace.Worlds.Snacks.GrabAndEat, SomniumSpace.Worlds.Snacks
+        m_MethodName: OnNetworkEatReceived
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1343895308580990618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620908452282223711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28732b03e6f75884696d521673a4d2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SomniumSpace.Network::SomniumSpace.Network.Bridge.NetworkBridge
+--- !u!114 &6308585966106209032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620908452282223711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 3909429965
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1343895308580990618}
+  ForceRemoteRenderTimeframe: 0
+--- !u!1 &2957792417556096845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7797329334969042194}
+  - component: {fileID: 2292586302530394016}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -17,28 +113,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7796066317329502733
+--- !u!4 &7797329334969042194
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746443748422299983}
+  m_GameObject: {fileID: 2957792417556096845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5024363193215309990}
+  m_Father: {fileID: 6718216657315975080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &8388972879956170344
+--- !u!82 &2292586302530394016
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746443748422299983}
+  m_GameObject: {fileID: 2957792417556096845}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -129,7 +225,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1582142795845366999
+--- !u!1 &3067496470259273758
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,9 +233,73 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4926352838036606992}
-  - component: {fileID: 1701549008683809574}
-  - component: {fileID: 5597059146637057622}
+  - component: {fileID: 6442694262326140246}
+  m_Layer: 0
+  m_Name: Cake 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6442694262326140246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3067496470259273758}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.000000014901161, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.48, y: 0.9330001, z: -3.5206184}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6718216657315975080}
+  - {fileID: 9063138212566288672}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3628023790773370790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9063138212566288672}
+  m_Layer: 0
+  m_Name: Respawn Location
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9063138212566288672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628023790773370790}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6442694262326140246}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &3858410238487193872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2842138860399581216}
+  - component: {fileID: 5984934320456444822}
+  - component: {fileID: 2554672244473526985}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -147,36 +307,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4926352838036606992
+--- !u!4 &2842138860399581216
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582142795845366999}
+  m_GameObject: {fileID: 3858410238487193872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5024363193215309990}
+  m_Father: {fileID: 6718216657315975080}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1701549008683809574
+--- !u!33 &5984934320456444822
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582142795845366999}
-  m_Mesh: {fileID: 3348057913412297574, guid: 3c877d22617302d4e930906b669f7422, type: 3}
---- !u!23 &5597059146637057622
+  m_GameObject: {fileID: 3858410238487193872}
+  m_Mesh: {fileID: 9168764567244909599, guid: edbe337709f1ff3428dee008d244039c, type: 3}
+--- !u!23 &2554672244473526985
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1582142795845366999}
+  m_GameObject: {fileID: 3858410238487193872}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -195,8 +355,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7870205a0033fdc4ea4c3245f0ec232b, type: 2}
-  - {fileID: 2100000, guid: dd6d90fa5f9115747a890c8f5baab646, type: 2}
+  - {fileID: 2100000, guid: 07bd096e5da0b21428bea6c4f7a875aa, type: 2}
+  - {fileID: 2100000, guid: 47c79b81234255845936748edf304ae2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,7 +380,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2722908271549945254
+--- !u!1 &5994233879163154671
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,243 +388,83 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8940491356407394202}
+  - component: {fileID: 6718216657315975080}
+  - component: {fileID: 3040849880455331771}
+  - component: {fileID: 7592625815355424127}
+  - component: {fileID: 3214989209131431017}
+  - component: {fileID: 8961571382501653696}
+  - component: {fileID: 6985654576833112792}
+  - component: {fileID: 7231437343826554500}
+  - component: {fileID: 4502179058483914749}
   m_Layer: 0
-  m_Name: Cake 1
+  m_Name: Cake 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8940491356407394202
+--- !u!4 &6718216657315975080
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2722908271549945254}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.48, y: 0.933, z: -1.04}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5024363193215309990}
-  - {fileID: 5810181663918946842}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5884820640807078185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4524057053350318538}
-  - component: {fileID: 2414029970115671663}
-  - component: {fileID: 5059921506474913601}
-  - component: {fileID: 1383539447415986827}
-  m_Layer: 0
-  m_Name: Cake 1 Networking
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4524057053350318538
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5024363193215309990}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2414029970115671663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d75b1ea2470f9b4e81bdbbcfdcd0bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.NetworkEnableObject
-  _networkBridge: {fileID: 5059921506474913601}
-  _networkObject: {fileID: 1383539447415986827}
-  _defaultEnable: 1
-  _controledGameObjects: []
-  _onChange:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 750056452594870414}
-        m_TargetAssemblyTypeName: SomniumSpace.Worlds.Snacks.GrabAndEat, SomniumSpace.Worlds.Snacks
-        m_MethodName: OnNetworkEatReceived
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5059921506474913601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28732b03e6f75884696d521673a4d2b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: SomniumSpace.Network::SomniumSpace.Network.Bridge.NetworkBridge
---- !u!114 &1383539447415986827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5884820640807078185}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
-  SortKey: 3909429965
-  ObjectInterest: 1
-  Flags: 262145
-  NestedObjects: []
-  NetworkedBehaviours:
-  - {fileID: 5059921506474913601}
-  ForceRemoteRenderTimeframe: 0
---- !u!1 &6444872957529548951
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5810181663918946842}
-  m_Layer: 0
-  m_Name: Respawn Location
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5810181663918946842
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6444872957529548951}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8940491356407394202}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!1 &8108747218585988400
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5024363193215309990}
-  - component: {fileID: 750056452594870414}
-  - component: {fileID: 3979709586822814433}
-  - component: {fileID: 7534390280481468877}
-  - component: {fileID: 7655407884256487965}
-  - component: {fileID: 796642583715276800}
-  - component: {fileID: 484051405007807801}
-  - component: {fileID: 5332695762028062626}
-  m_Layer: 0
-  m_Name: Cake
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5024363193215309990
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: -0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4926352838036606992}
-  - {fileID: 4524057053350318538}
-  - {fileID: 7796066317329502733}
-  m_Father: {fileID: 8940491356407394202}
+  - {fileID: 2842138860399581216}
+  - {fileID: 7226164826750083693}
+  - {fileID: 7797329334969042194}
+  m_Father: {fileID: 6442694262326140246}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &750056452594870414
+--- !u!114 &3040849880455331771
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2b585cafbcca75469d34065e9c3741c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.GrabAndEat
-  tableSpawnPoint: {fileID: 5810181663918946842}
-  foodMeshObject: {fileID: 1582142795845366999}
+  tableSpawnPoint: {fileID: 9063138212566288672}
+  foodMeshObject: {fileID: 3858410238487193872}
   respawnDelay: 1
   mouthRadius: 0.3
-  networkEnableObject: {fileID: 2414029970115671663}
-  audioSource: {fileID: 8388972879956170344}
+  networkEnableObject: {fileID: 2084896084089193735}
+  audioSource: {fileID: 2292586302530394016}
   eatSFX: {fileID: 8300000, guid: 5c30f52c5b831f24bab6d0416ece87c8, type: 3}
   eatParticles: {fileID: 0}
---- !u!114 &3979709586822814433
+--- !u!114 &7592625815355424127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8f14f1198a49cb418d604114edc06a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: SomniumSpace.Worlds.Snacks::SomniumSpace.Worlds.Snacks.NetworkGrabbable
-  _grabInteracable: {fileID: 7655407884256487965}
-  _rigidbody: {fileID: 484051405007807801}
-  _networkObject: {fileID: 796642583715276800}
-  _networkRigidbody: {fileID: 7534390280481468877}
+  _grabInteracable: {fileID: 8961571382501653696}
+  _rigidbody: {fileID: 7231437343826554500}
+  _networkObject: {fileID: 6985654576833112792}
+  _networkRigidbody: {fileID: 3214989209131431017}
   _isKinematic: 1
---- !u!114 &7534390280481468877
+--- !u!114 &3214989209131431017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0a591d221a634417e9827eb58e17de84, type: 3}
@@ -481,13 +481,13 @@ MonoBehaviour:
     Position: 0.01
     Rotation: 0.01
     Scale: 0.01
---- !u!114 &7655407884256487965
+--- !u!114 &8961571382501653696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
@@ -610,13 +610,13 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
---- !u!114 &796642583715276800
+--- !u!114 &6985654576833112792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
@@ -626,17 +626,17 @@ MonoBehaviour:
   ObjectInterest: 1
   Flags: 524289
   NestedObjects:
-  - {fileID: 1383539447415986827}
+  - {fileID: 6308585966106209032}
   NetworkedBehaviours:
-  - {fileID: 7534390280481468877}
+  - {fileID: 3214989209131431017}
   ForceRemoteRenderTimeframe: 0
---- !u!54 &484051405007807801
+--- !u!54 &7231437343826554500
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
@@ -657,13 +657,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5332695762028062626
+--- !u!65 &4502179058483914749
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8108747218585988400}
+  m_GameObject: {fileID: 5994233879163154671}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -676,5 +676,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.005682856, y: 0.005406989, z: 0.002094901}
-  m_Center: {x: 0.0000943774, y: -0.000056183635, z: -0.000075708034}
+  m_Size: {x: 0.0048568705, y: 0.004966972, z: 0.002094901}
+  m_Center: {x: -0.0008389893, y: -0.0006700083, z: -0.00007570805}
