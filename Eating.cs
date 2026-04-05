@@ -32,6 +32,10 @@ namespace SomniumSpace.Worlds.Snacks
         [SerializeField] private AudioClip eatSFX;
         [SerializeField] private ParticleSystem eatParticles;
 
+        [Header("Lost Food Recovery")]
+        [Tooltip("If the food is held for longer than this many seconds without being eaten, it teleports back to the table. Set to 0 to disable.")]
+        [SerializeField] private float grabTimeoutSeconds = 5f;
+
         // Cached components
         private XRGrabInteractable _grabInteractable;
         private Rigidbody _rigidbody;
@@ -41,6 +45,7 @@ namespace SomniumSpace.Worlds.Snacks
         private bool _hasBeenEaten;
         private bool _respawnPending;
         private bool _audioPlayed;
+        private bool _particlePlayed;
 
         // Player head references
         private Transform _localPlayerHead;
@@ -55,6 +60,9 @@ namespace SomniumSpace.Worlds.Snacks
         private float _debugLogTimer;
         private const float DEBUG_LOG_INTERVAL = 1f;
 
+        // Grab timeout timer
+        private float _grabTimer;
+
         #region Unity Lifecycle
 
         private void Awake()
@@ -62,7 +70,6 @@ namespace SomniumSpace.Worlds.Snacks
             _grabInteractable = GetComponent<XRGrabInteractable>();
             _rigidbody = GetComponent<Rigidbody>();
 
-            // Default to this GameObject if nothing assigned
             if (foodMeshObject == null)
                 foodMeshObject = gameObject;
 
@@ -106,7 +113,20 @@ namespace SomniumSpace.Worlds.Snacks
         {
             if (!_isGrabbed || _hasBeenEaten) return;
 
-            // Throttle to 10Hz
+            // Grab timeout - teleport food back if held too long without eating
+            if (grabTimeoutSeconds > 0f)
+            {
+                _grabTimer += Time.deltaTime;
+                if (_grabTimer >= grabTimeoutSeconds)
+                {
+                    Debug.Log("GrabAndEat: Grab timeout reached - teleporting food back to table.");
+                    _grabTimer = 0f;
+                    TeleportToTable();
+                    return;
+                }
+            }
+
+            // Throttle mouth check to 10Hz
             _mouthCheckTimer += Time.deltaTime;
             if (_mouthCheckTimer < MOUTH_CHECK_INTERVAL) return;
             _mouthCheckTimer = 0f;
@@ -131,6 +151,7 @@ namespace SomniumSpace.Worlds.Snacks
         private void OnGrabbed(SelectEnterEventArgs args)
         {
             _isGrabbed = true;
+            _grabTimer = 0f;
             _mouthCheckTimer = 0f;
             _debugLogTimer = 0f;
             TryGetPlayerReferences();
@@ -142,6 +163,7 @@ namespace SomniumSpace.Worlds.Snacks
         private void OnReleased(SelectExitEventArgs args)
         {
             _isGrabbed = false;
+            _grabTimer = 0f;
             Debug.Log("GrabAndEat: Released.");
         }
 
@@ -267,8 +289,12 @@ namespace SomniumSpace.Worlds.Snacks
                 audioSource.PlayOneShot(eatSFX);
             }
 
-            if (eatParticles != null)
+            // Guard particles the same way as audio - only plays once per eat
+            if (!_particlePlayed && eatParticles != null)
+            {
+                _particlePlayed = true;
                 eatParticles.Play();
+            }
         }
 
         private void ShowMesh()
@@ -276,6 +302,7 @@ namespace SomniumSpace.Worlds.Snacks
             _respawnPending = false;
             _hasBeenEaten = false;
             _audioPlayed = false;
+            _particlePlayed = false;
 
             // Skip teleport if currently grabbed to avoid snap-while-held issues
             if (_isGrabbed)
