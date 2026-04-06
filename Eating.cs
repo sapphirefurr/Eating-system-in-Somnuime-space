@@ -33,8 +33,8 @@ namespace SomniumSpace.Worlds.Snacks
         [SerializeField] private ParticleSystem eatParticles;
 
         [Header("Lost Food Recovery")]
-        [Tooltip("If the food is held for longer than this many seconds without being eaten, it teleports back to the table. Set to 0 to disable.")]
-        [SerializeField] private float grabTimeoutSeconds = 5f;
+        [Tooltip("If the food is dropped and not picked up again within this many seconds, it teleports back to the table. Set to 0 to disable.")]
+        [SerializeField] private float dropTimeoutSeconds = 5f;
 
         // Cached components
         private XRGrabInteractable _grabInteractable;
@@ -46,6 +46,11 @@ namespace SomniumSpace.Worlds.Snacks
         private bool _respawnPending;
         private bool _audioPlayed;
         private bool _particlePlayed;
+        private bool _hasBeenGrabbedAtLeastOnce;
+
+        // Drop timeout timer
+        private float _dropTimer;
+        private bool _dropTimerActive;
 
         // Player head references
         private Transform _localPlayerHead;
@@ -111,22 +116,20 @@ namespace SomniumSpace.Worlds.Snacks
 
         private void Update()
         {
-            if (!_isGrabbed || _hasBeenEaten) return;
-
-            // Grab timeout - teleport food back if held too long without eating
-            if (grabTimeoutSeconds > 0f)
+            // Drop timeout - counts down only when not grabbed, after being grabbed at least once
+            if (_dropTimerActive && !_isGrabbed && !_hasBeenEaten && !_respawnPending)
             {
-                _grabTimer += Time.deltaTime;
-                if (_grabTimer >= grabTimeoutSeconds)
+                _dropTimer += Time.deltaTime;
+                if (_dropTimer >= dropTimeoutSeconds)
                 {
-                    Debug.Log("GrabAndEat: Grab timeout reached - teleporting food back to table.");
-                    _grabTimer = 0f;
+                    Debug.Log("GrabAndEat: Drop timeout reached - teleporting food back to table.");
+                    _dropTimerActive = false;
+                    _dropTimer = 0f;
                     TeleportToTable();
-                    return;
                 }
             }
 
-            // Throttle mouth check to 10Hz
+            if (!_isGrabbed || _hasBeenEaten) return;
             _mouthCheckTimer += Time.deltaTime;
             if (_mouthCheckTimer < MOUTH_CHECK_INTERVAL) return;
             _mouthCheckTimer = 0f;
@@ -151,7 +154,12 @@ namespace SomniumSpace.Worlds.Snacks
         private void OnGrabbed(SelectEnterEventArgs args)
         {
             _isGrabbed = true;
-            _grabTimer = 0f;
+            _hasBeenGrabbedAtLeastOnce = true;
+
+            // Cancel drop timer when picked up
+            _dropTimerActive = false;
+            _dropTimer = 0f;
+
             _mouthCheckTimer = 0f;
             _debugLogTimer = 0f;
             TryGetPlayerReferences();
@@ -163,7 +171,15 @@ namespace SomniumSpace.Worlds.Snacks
         private void OnReleased(SelectExitEventArgs args)
         {
             _isGrabbed = false;
-            _grabTimer = 0f;
+
+            // Start drop timer only if it has been grabbed before and is not eaten/respawning
+            if (_hasBeenGrabbedAtLeastOnce && !_hasBeenEaten && !_respawnPending && dropTimeoutSeconds > 0f)
+            {
+                _dropTimerActive = true;
+                _dropTimer = 0f;
+                Debug.Log("GrabAndEat: Released - drop timer started (" + dropTimeoutSeconds + "s).");
+            }
+
             Debug.Log("GrabAndEat: Released.");
         }
 
@@ -303,6 +319,11 @@ namespace SomniumSpace.Worlds.Snacks
             _hasBeenEaten = false;
             _audioPlayed = false;
             _particlePlayed = false;
+
+            // Reset so drop timer won't start until food is grabbed again after respawn
+            _hasBeenGrabbedAtLeastOnce = false;
+            _dropTimerActive = false;
+            _dropTimer = 0f;
 
             // Skip teleport if currently grabbed to avoid snap-while-held issues
             if (_isGrabbed)
